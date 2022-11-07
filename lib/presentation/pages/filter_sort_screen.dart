@@ -102,7 +102,6 @@ class _FilterSortScreenState extends State<FilterSortScreen> {
         },
         icon: const Icon(
           Icons.check,
-          color: Colors.white,
         ),
         label: const Text('Apply'),
       ),

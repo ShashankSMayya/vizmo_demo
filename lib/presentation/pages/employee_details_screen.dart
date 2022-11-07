@@ -21,41 +21,43 @@ class EmployeeDetailsScreen extends StatelessWidget {
           maxLines: 1,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            EmployeeDetailsCard(emp: employee),
-            const Gap(20),
-            BlocBuilder<CheckinCubit, CheckinState>(
-              builder: (context, state) {
-                if (state is CheckinError) {
-                  return Text(state.error ?? 'Something went wrong');
-                }
-                if (state is CheckinLoading) {
-                  return const Center(
-                      child: CircularProgressIndicator.adaptive());
-                }
-                if (state is CheckinLoaded) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Checkin Data',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const Gap(20),
-                      ...state.checkins.map(
-                        (e) => CheckinCard(checkin: e),
-                      ),
-                    ],
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              EmployeeDetailsCard(emp: employee),
+              const Gap(20),
+              BlocBuilder<CheckinCubit, CheckinState>(
+                builder: (context, state) {
+                  if (state is CheckinError) {
+                    return Text(state.error ?? 'Something went wrong');
+                  }
+                  if (state is CheckinLoading) {
+                    return const Center(
+                        child: CircularProgressIndicator.adaptive());
+                  }
+                  if (state is CheckinLoaded) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Checkin Data',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const Gap(20),
+                        ...state.checkins.map(
+                          (e) => CheckinCard(checkin: e),
+                        ),
+                      ],
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

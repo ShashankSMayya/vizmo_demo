@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vizmo_demo/presentation/pages/employee_tab.dart';
 import 'package:vizmo_demo/presentation/pages/profile_tab.dart';
+import 'package:vizmo_demo/presentation/pages/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,19 +23,28 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PageView(
-          controller: _pageController,
-          children: const [
-            EmployeeTab(),
-            ProfileTab(),
-          ],
-          onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
+      appBar: AppBar(
+        title: const Text('Vizmo Demo'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: SearchScreen());
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
+      ),
+      body: PageView(
+        controller: _pageController,
+        children: const [
+          EmployeeTab(),
+          ProfileTab(),
+        ],
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {

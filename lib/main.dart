@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vizmo_demo/core/di/di.dart';
 import 'package:vizmo_demo/core/routes/route_generator.dart';
 import 'package:vizmo_demo/core/routes/routes.dart';
@@ -27,6 +28,18 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Vizmo Demo',
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.light,
+        darkTheme: ThemeData.dark().copyWith(
+          useMaterial3: true,
+          textTheme: GoogleFonts.robotoTextTheme(),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red),
+        ),
+        theme: ThemeData.light().copyWith(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red),
+          textTheme: GoogleFonts.robotoTextTheme(),
+        ),
         initialRoute: Routes.initial,
         onGenerateRoute: getIt<RouteGenerator>().onGenerateRoute,
       ),
