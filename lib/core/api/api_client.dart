@@ -11,6 +11,7 @@ class ApiClient {
     try {
       print('GET: $path');
       final response = await _dio.get(path, queryParameters: queryParams);
+      print(response.headers);
       print(response.data);
       return response.data;
     } on DioError catch (e) {

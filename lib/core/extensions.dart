@@ -6,5 +6,5 @@ extension FormattedDates on DateTime {
   String get formattedTime => DateFormat('HH:mm').format(this);
 
   String get formattedDateTime =>
-      DateFormat('dd MMM yyyy HH:mm a').format(toLocal());
+      DateFormat('dd MMM yyyy hh:mm a').format(toLocal());
 }

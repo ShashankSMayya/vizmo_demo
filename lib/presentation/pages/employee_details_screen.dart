@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:vizmo_demo/data/models/employee.dart';
 import 'package:vizmo_demo/presentation/blocs/checkin/checkin_cubit.dart';
+import 'package:vizmo_demo/presentation/widgets/checkin_card.dart';
 import 'package:vizmo_demo/presentation/widgets/employee_details_card.dart';
 
 class EmployeeDetailsScreen extends StatelessWidget {
@@ -38,10 +39,15 @@ class EmployeeDetailsScreen extends StatelessWidget {
                 }
                 if (state is CheckinLoaded) {
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Checkin Data',
                         style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const Gap(20),
+                      ...state.checkins.map(
+                        (e) => CheckinCard(checkin: e),
                       ),
                     ],
                   );
