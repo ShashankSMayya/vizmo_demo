@@ -4,6 +4,8 @@ import 'package:vizmo_demo/core/api/api_constants.dart';
 
 @module
 abstract class InjectionModule {
+  /// Register all the dependencies here that can't be initialized in the constructor
+
   @Named('baseUrl')
   String get baseUrl => ApiConstants.baseUrl;
 

@@ -7,12 +7,16 @@ import 'package:vizmo_demo/domain/entities/params/get_checkin_params.dart';
 import '../../models/employee.dart';
 
 abstract class EmployeeRemoteDataSource {
+  /// Get all employees based on the given params
   Future<List<Employee>> getEmployees(Map<String, dynamic> params);
 
+  /// Get a single employee based on the given params ideally the id as the api supports this.
   Future<Employee> getEmployee(Map<String, dynamic> params);
 
+  /// Get all checkins for a given employee
   Future<List<Checkin>> getCheckins(GetCheckinParams params);
 
+  /// Get a single checkin for a given employee with checkinId named as id in the params
   Future<Checkin> getCheckin(GetCheckinParams params);
 }
 

@@ -21,6 +21,8 @@ class EmployeeCubit extends Cubit<EmployeeState> {
   OrderBy _orderBy = OrderBy.asc;
   EmployeeSortBy _sortBy = EmployeeSortBy.id;
 
+  String _oldSearch = '';
+
   Future<void> getEmployees({
     bool? isFirstFetch,
     OrderBy? orderBy,
@@ -63,6 +65,10 @@ class EmployeeCubit extends Cubit<EmployeeState> {
   // used to search the employees by name in search screen
   // can add other parameters too.
   void searchEmployee({required String name}) async {
+    // if the search query is the same as the previous one, don't call the api
+
+    if (name == _oldSearch) return;
+    _oldSearch = name;
     emit(const EmployeeLoading());
     final res = await _getEmployees(GetEmployeeParams(
       name: name,
