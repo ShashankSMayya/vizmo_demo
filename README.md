@@ -34,3 +34,25 @@ Then you can run the project by running the following command:
 flutter run
 ```
 
+## Project Info
+
+The project uses Repository pattern Architecture. The project is divided into 3 layers:
+
+1. Data Layer
+2. Domain Layer
+3. Presentation Layer
+
+More Info about the repository pattern can be
+found [here](https://codewithandrea.com/articles/flutter-repository-pattern/).
+
+Uses flutter_bloc for state management.
+More info about flutter_bloc can be found [here](https://bloclibrary.dev/#/).
+
+The project uses [GetIt](https://pub.dev/packages/get_it) for dependency injection.
+
+The project uses [JsonSerializable](https://pub.dev/packages/json_serializable) to generate the json model parsing.
+
+Built by
+[Shashank S Mayya](https://github.com/ShashankSMayya)
+
+
