@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vizmo_demo/core/routes/routes.dart';
 import 'package:vizmo_demo/presentation/blocs/employee/employee_cubit.dart';
 import 'package:vizmo_demo/presentation/blocs/employee_sort/employee_sort_cubit.dart';
+import 'package:vizmo_demo/presentation/widgets/employee_card.dart';
 
 import '../../core/error/app_error.dart';
 
@@ -49,7 +49,9 @@ class _EmployeeTabState extends State<EmployeeTab>
     return BlocListener<EmployeeSortCubit, EmployeeSortState>(
       listener: (context, state) {
         context.read<EmployeeCubit>().getEmployees(
-            isFirstFetch: true, orderBy: state.orderByParam, sortBy: state.sortBy);
+            isFirstFetch: true,
+            orderBy: state.orderByParam,
+            sortBy: state.sortBy);
       },
       child: BlocBuilder<EmployeeCubit, EmployeeState>(
         builder: (context, state) {
@@ -91,14 +93,7 @@ class _EmployeeTabState extends State<EmployeeTab>
                   itemBuilder: (context, index) {
                     if (index < employees.length) {
                       final emp = employees[index];
-                      return ListTile(
-                        title: Text(emp.name),
-                        subtitle: Text(emp.email),
-                        leading: CircleAvatar(
-                          backgroundImage:
-                              CachedNetworkImageProvider(emp.avatar),
-                        ),
-                      );
+                      return EmployeeCard(emp: emp);
                     } else {
                       return loadError
                           ? _errorWidget(errorType)

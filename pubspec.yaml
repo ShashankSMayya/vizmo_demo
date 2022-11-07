@@ -40,6 +40,8 @@ dependencies:
   injectable: ^1.5.4
   dartz: ^0.10.1
   cached_network_image: ^3.2.2
+  gap: ^2.0.0
+  intl: ^0.17.0
 
 
 
