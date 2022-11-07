@@ -53,4 +53,13 @@ class EmployeeCubit extends Cubit<EmployeeState> {
       },
     );
   }
+
+  void searchEmployee({required String name}) async {
+    emit(const EmployeeLoading());
+    final res = await _getEmployees(GetEmployeeParams(
+      name: name,
+    ));
+    emit(res.fold((l) => EmployeeLoadError(l.errorType, l.error),
+        (r) => EmployeeLoaded(r)));
+  }
 }

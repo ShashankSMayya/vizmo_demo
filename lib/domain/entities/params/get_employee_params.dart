@@ -4,7 +4,7 @@ import '../enums.dart';
 
 part 'get_employee_params.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class GetEmployeeParams {
   final String? id;
 
@@ -24,7 +24,8 @@ class GetEmployeeParams {
   /// [EmployeeSortBy.createdAt]
   final EmployeeSortBy? sortBy;
 
-  //TODO add search by name, email, phone, country
+  //TODO add search by  email, phone, country
+  final String? name;
 
   GetEmployeeParams({
     this.id,
@@ -32,6 +33,7 @@ class GetEmployeeParams {
     this.limit = 10,
     this.orderBy,
     this.sortBy,
+    this.name,
   })  : assert(page > 0, 'page must be greater than 0'),
         assert(limit > 0, 'limit must be greater than 0');
 

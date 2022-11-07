@@ -13,16 +13,26 @@ GetEmployeeParams _$GetEmployeeParamsFromJson(Map<String, dynamic> json) =>
       limit: json['limit'] as int? ?? 10,
       orderBy: $enumDecodeNullable(_$OrderByEnumMap, json['order']),
       sortBy: $enumDecodeNullable(_$EmployeeSortByEnumMap, json['sortBy']),
+      name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$GetEmployeeParamsToJson(GetEmployeeParams instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'page': instance.page,
-      'limit': instance.limit,
-      'order': _$OrderByEnumMap[instance.orderBy],
-      'sortBy': _$EmployeeSortByEnumMap[instance.sortBy],
-    };
+Map<String, dynamic> _$GetEmployeeParamsToJson(GetEmployeeParams instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['page'] = instance.page;
+  val['limit'] = instance.limit;
+  writeNotNull('order', _$OrderByEnumMap[instance.orderBy]);
+  writeNotNull('sortBy', _$EmployeeSortByEnumMap[instance.sortBy]);
+  writeNotNull('name', instance.name);
+  return val;
+}
 
 const _$OrderByEnumMap = {
   OrderBy.asc: 'asc',

@@ -5,17 +5,21 @@ import 'package:injectable/injectable.dart';
 class ApiClient {
   final Dio _dio;
 
-  ApiClient(this._dio);
+  ApiClient(this._dio) {
+    _dio.interceptors.add(LogInterceptor(
+        error: true,
+        request: true,
+        requestBody: true,
+        responseBody: false,
+        responseHeader: false));
+  }
 
   dynamic get(String path, {Map<String, dynamic>? queryParams}) async {
     try {
-      print('GET: $path');
       final response = await _dio.get(path, queryParameters: queryParams);
-      print(response.headers);
-      print(response.data);
+
       return response.data;
     } on DioError catch (e) {
-      print(e);
       rethrow;
     }
   }
@@ -25,12 +29,10 @@ class ApiClient {
     Map<String, dynamic>? data,
   }) async {
     try {
-      print('POST: $url');
       final response = await _dio.post(url, data: data);
-      print(response.data);
+
       return response.data;
     } on DioError catch (e) {
-      print(e);
       rethrow;
     }
   }

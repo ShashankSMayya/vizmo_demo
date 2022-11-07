@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vizmo_demo/core/di/di.dart';
+import 'package:vizmo_demo/core/utils/debouncer.dart';
+import 'package:vizmo_demo/presentation/blocs/employee/employee_cubit.dart';
 import 'package:vizmo_demo/presentation/pages/employee_tab.dart';
 import 'package:vizmo_demo/presentation/pages/profile_tab.dart';
 import 'package:vizmo_demo/presentation/pages/search_screen.dart';
@@ -27,8 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Vizmo Demo'),
         actions: [
           IconButton(
-            onPressed: () {
-              showSearch(context: context, delegate: SearchScreen());
+            onPressed: () async {
+              final employeeCubit = getIt<EmployeeCubit>();
+              final debouncer = Debouncer(milliseconds: 300);
+              final res = await showSearch(
+                context: context,
+                delegate: SearchScreen(employeeCubit, debouncer),
+              );
+              employeeCubit.close();
+              debouncer.close();
             },
             icon: const Icon(Icons.search),
           ),

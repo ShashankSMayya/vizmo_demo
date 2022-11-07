@@ -8,11 +8,13 @@ abstract class InjectionModule {
   String get baseUrl => ApiConstants.baseUrl;
 
   @lazySingleton
-  Dio dio(@Named('baseUrl') String baseUrl) => Dio(BaseOptions(
-        baseUrl: baseUrl,
-        contentType: Headers.jsonContentType,
-        connectTimeout: 60 * 1000,
-        receiveTimeout: 60 * 1000,
-        sendTimeout: 30 * 1000,
-      ));
+  Dio dio(@Named('baseUrl') String baseUrl) => Dio(
+        BaseOptions(
+          baseUrl: baseUrl,
+          contentType: Headers.jsonContentType,
+          connectTimeout: 60 * 1000,
+          receiveTimeout: 60 * 1000,
+          sendTimeout: 30 * 1000,
+        ),
+      );
 }
