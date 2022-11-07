@@ -9,9 +9,12 @@ class ApiClient {
 
   dynamic get(String path, {Map<String, dynamic>? queryParams}) async {
     try {
+      print('GET: $path');
       final response = await _dio.get(path, queryParameters: queryParams);
+      print(response.data);
       return response.data;
     } on DioError catch (e) {
+      print(e);
       rethrow;
     }
   }
@@ -21,9 +24,12 @@ class ApiClient {
     Map<String, dynamic>? data,
   }) async {
     try {
+      print('POST: $url');
       final response = await _dio.post(url, data: data);
+      print(response.data);
       return response.data;
     } on DioError catch (e) {
+      print(e);
       rethrow;
     }
   }

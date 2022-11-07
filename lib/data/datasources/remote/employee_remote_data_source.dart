@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:vizmo_demo/core/api/api_client.dart';
 import 'package:vizmo_demo/core/api/api_constants.dart';
 import 'package:vizmo_demo/data/models/checkin.dart';
+import 'package:vizmo_demo/domain/entities/params/get_checkin_params.dart';
 
 import '../../models/employee.dart';
 
@@ -10,7 +11,7 @@ abstract class EmployeeRemoteDataSource {
 
   Future<Employee> getEmployee(Map<String, dynamic> params);
 
-  Future<List<Checkin>> getCheckins(Map<String, dynamic> params);
+  Future<List<Checkin>> getCheckins(GetCheckinParams params);
 
   Future<Checkin> getCheckin(Map<String, dynamic> params);
 }
@@ -28,9 +29,10 @@ class EmployeeRemoteDataSourceImpl implements EmployeeRemoteDataSource {
   }
 
   @override
-  Future<List<Checkin>> getCheckins(Map<String, dynamic> params) {
-    // TODO: implement getCheckins
-    throw UnimplementedError();
+  Future<List<Checkin>> getCheckins(GetCheckinParams params) async {
+    final result = await _client
+        .get('${ApiConstants.employees}/${params.employeeId}/checkin');
+    return (result as List).map((e) => Checkin.fromJson(e)).toList();
   }
 
   @override

@@ -12,12 +12,14 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../../data/datasources/remote/employee_remote_data_source.dart' as _i7;
 import '../../data/repositories/employee_repository_impl.dart' as _i9;
 import '../../domain/repositories/employee_repository.dart' as _i8;
-import '../../domain/usecases/employee/get_employees.dart' as _i10;
-import '../../presentation/blocs/employee/employee_cubit.dart' as _i11;
+import '../../domain/usecases/employee/get_checkins.dart' as _i10;
+import '../../domain/usecases/employee/get_employees.dart' as _i11;
+import '../../presentation/blocs/checkin/checkin_cubit.dart' as _i12;
+import '../../presentation/blocs/employee/employee_cubit.dart' as _i13;
 import '../../presentation/blocs/employee_sort/employee_sort_cubit.dart' as _i3;
 import '../api/api_client.dart' as _i6;
 import '../routes/route_generator.dart' as _i4;
-import 'di_module.dart' as _i12; // ignore_for_file: unnecessary_lambdas
+import 'di_module.dart' as _i14; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -45,11 +47,15 @@ _i1.GetIt $initGetIt(
       () => _i7.EmployeeRemoteDataSourceImpl(get<_i6.ApiClient>()));
   gh.lazySingleton<_i8.EmployeeRepository>(
       () => _i9.EmployeeRepositoryImpl(get<_i7.EmployeeRemoteDataSource>()));
-  gh.factory<_i10.GetEmployees>(
-      () => _i10.GetEmployees(get<_i8.EmployeeRepository>()));
-  gh.factory<_i11.EmployeeCubit>(
-      () => _i11.EmployeeCubit(get<_i10.GetEmployees>()));
+  gh.factory<_i10.GetCheckins>(
+      () => _i10.GetCheckins(get<_i8.EmployeeRepository>()));
+  gh.factory<_i11.GetEmployees>(
+      () => _i11.GetEmployees(get<_i8.EmployeeRepository>()));
+  gh.factory<_i12.CheckinCubit>(
+      () => _i12.CheckinCubit(get<_i10.GetCheckins>()));
+  gh.factory<_i13.EmployeeCubit>(
+      () => _i13.EmployeeCubit(get<_i11.GetEmployees>()));
   return get;
 }
 
-class _$InjectionModule extends _i12.InjectionModule {}
+class _$InjectionModule extends _i14.InjectionModule {}

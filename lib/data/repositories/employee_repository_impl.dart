@@ -5,6 +5,7 @@ import 'package:vizmo_demo/core/error/app_error.dart';
 import 'package:vizmo_demo/data/datasources/remote/employee_remote_data_source.dart';
 import 'package:vizmo_demo/data/models/checkin.dart';
 import 'package:vizmo_demo/data/models/employee.dart';
+import 'package:vizmo_demo/domain/entities/params/get_checkin_params.dart';
 import 'package:vizmo_demo/domain/repositories/employee_repository.dart';
 
 @LazySingleton(as: EmployeeRepository)
@@ -20,10 +21,9 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
   }
 
   @override
-  Future<Either<AppError, List<Checkin>>> getCheckins(
-      Map<String, dynamic> params) {
-    // TODO: implement getCheckins
-    throw UnimplementedError();
+  Future<Either<AppError, List<Checkin>>> getCheckins(GetCheckinParams params) {
+    return ApiCallWithError.call(
+        () => _remoteDataSource.getCheckins(params));
   }
 
   @override
