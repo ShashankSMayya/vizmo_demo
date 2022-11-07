@@ -36,6 +36,9 @@ flutter run
 
 ## Project Info
 
+Uses Flutter Version: 3.3.6 (stable)
+Uses Dart Version: 2.18.4 (stable)
+
 The project uses Repository pattern Architecture. The project is divided into 3 layers:
 
 1. Data Layer
