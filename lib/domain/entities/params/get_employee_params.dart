@@ -14,9 +14,9 @@ class GetEmployeeParams {
   /// Default limit is 10
   final int limit;
 
-  /// if [order] is null, it will be set to [Order.asc] indicating ascending order
+  /// if [order] is null, it will be set to [OrderBy.asc] indicating ascending order
   @JsonKey(name: 'order')
-  final Order? orderBy;
+  final OrderBy? orderBy;
 
   /// Can be sorted by
   /// [EmployeeSortBy.id], [EmployeeSortBy.name], [EmployeeSortBy.email],

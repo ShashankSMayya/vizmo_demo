@@ -22,20 +22,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Vizmo Demo'),
-      ),
-      body: PageView(
-        controller: _pageController,
-        children: const [
-          EmployeeTab(),
-          ProfileTab(),
-        ],
-        onPageChanged: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+      body: SafeArea(
+        child: PageView(
+          controller: _pageController,
+          children: const [
+            EmployeeTab(),
+            ProfileTab(),
+          ],
+          onPageChanged: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {

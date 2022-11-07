@@ -11,7 +11,7 @@ GetEmployeeParams _$GetEmployeeParamsFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       page: json['page'] as int? ?? 1,
       limit: json['limit'] as int? ?? 10,
-      orderBy: $enumDecodeNullable(_$OrderEnumMap, json['order']),
+      orderBy: $enumDecodeNullable(_$OrderByEnumMap, json['order']),
       sortBy: $enumDecodeNullable(_$EmployeeSortByEnumMap, json['sortBy']),
     );
 
@@ -20,13 +20,13 @@ Map<String, dynamic> _$GetEmployeeParamsToJson(GetEmployeeParams instance) =>
       'id': instance.id,
       'page': instance.page,
       'limit': instance.limit,
-      'order': _$OrderEnumMap[instance.orderBy],
+      'order': _$OrderByEnumMap[instance.orderBy],
       'sortBy': _$EmployeeSortByEnumMap[instance.sortBy],
     };
 
-const _$OrderEnumMap = {
-  Order.asc: 'asc',
-  Order.desc: 'desc',
+const _$OrderByEnumMap = {
+  OrderBy.asc: 'asc',
+  OrderBy.desc: 'desc',
 };
 
 const _$EmployeeSortByEnumMap = {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vizmo_demo/core/di/di.dart';
+import 'package:vizmo_demo/core/routes/route_generator.dart';
+import 'package:vizmo_demo/core/routes/routes.dart';
 import 'package:vizmo_demo/presentation/blocs/employee/employee_cubit.dart';
-import 'package:vizmo_demo/presentation/pages/home_screen.dart';
+import 'package:vizmo_demo/presentation/blocs/employee_sort/employee_sort_cubit.dart';
 
 void main() {
   configureDependencies();
@@ -14,11 +16,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<EmployeeCubit>()..getEmployees(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<EmployeeCubit>()..getEmployees(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<EmployeeSortCubit>(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Vizmo Demo',
-        home: HomeScreen(),
+        initialRoute: Routes.initial,
+        onGenerateRoute: getIt<RouteGenerator>().onGenerateRoute,
       ),
     );
   }

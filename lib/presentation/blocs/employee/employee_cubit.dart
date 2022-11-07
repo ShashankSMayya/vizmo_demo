@@ -18,10 +18,12 @@ class EmployeeCubit extends Cubit<EmployeeState> {
 
   int _page = 1;
   final int _limit = 10;
+  OrderBy _orderBy = OrderBy.asc;
+  EmployeeSortBy _sortBy = EmployeeSortBy.id;
 
   void getEmployees({
     bool? isFirstFetch,
-    Order? orderBy,
+    OrderBy? orderBy,
     EmployeeSortBy? sortBy,
   }) async {
     if (state is EmployeeLoading) {
@@ -32,9 +34,11 @@ class EmployeeCubit extends Cubit<EmployeeState> {
       _page = 1;
       oldEmployees.clear();
     }
+    _orderBy = orderBy ?? _orderBy;
+    _sortBy = sortBy ?? _sortBy;
     emit(EmployeeLoading(oldEmployees: oldEmployees));
     final res = await _getEmployees(GetEmployeeParams(
-        page: _page, limit: _limit, orderBy: orderBy, sortBy: sortBy));
+        page: _page, limit: _limit, orderBy: _orderBy, sortBy: _sortBy));
     res.fold(
       (l) => emit(
           EmployeeLoadError(l.errorType, l.error, employees: oldEmployees)),
