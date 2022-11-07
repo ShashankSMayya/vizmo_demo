@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+/// A widget that displays two rows of text.
 class TwoRowText extends StatelessWidget {
   final String title;
   final String info;

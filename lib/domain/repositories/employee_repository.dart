@@ -13,5 +13,5 @@ abstract class EmployeeRepository {
 
   Future<Either<AppError, List<Checkin>>> getCheckins(GetCheckinParams params);
 
-  Future<Either<AppError, Checkin>> getCheckin(Map<String, dynamic> params);
+  Future<Either<AppError, Checkin>> getCheckin(GetCheckinParams params);
 }

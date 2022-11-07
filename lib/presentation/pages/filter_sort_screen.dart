@@ -12,12 +12,14 @@ class FilterSortScreen extends StatefulWidget {
 }
 
 class _FilterSortScreenState extends State<FilterSortScreen> {
+  //assign by default to asc and id as the api sends the data in ascending order by default and by id
   OrderBy _orderBy = OrderBy.asc;
   EmployeeSortBy _employeeSortBy = EmployeeSortBy.id;
 
   @override
   void didChangeDependencies() {
     final empSortCubit = context.read<EmployeeSortCubit>();
+    //get the current state of the cubit and assign it to the variables
     _orderBy = empSortCubit.state.orderByParam;
     _employeeSortBy = empSortCubit.state.sortBy;
     super.didChangeDependencies();

@@ -13,7 +13,7 @@ abstract class EmployeeRemoteDataSource {
 
   Future<List<Checkin>> getCheckins(GetCheckinParams params);
 
-  Future<Checkin> getCheckin(Map<String, dynamic> params);
+  Future<Checkin> getCheckin(GetCheckinParams params);
 }
 
 @LazySingleton(as: EmployeeRemoteDataSource)
@@ -23,9 +23,10 @@ class EmployeeRemoteDataSourceImpl implements EmployeeRemoteDataSource {
   EmployeeRemoteDataSourceImpl(this._client);
 
   @override
-  Future<Checkin> getCheckin(Map<String, dynamic> params) {
-    // TODO: implement getCheckin
-    throw UnimplementedError();
+  Future<Checkin> getCheckin(GetCheckinParams params) async {
+    final result = await _client.get(
+        '${ApiConstants.employees}/${params.employeeId}/checkin/${params.id!}');
+    return Checkin.fromJson(result);
   }
 
   @override

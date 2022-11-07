@@ -5,6 +5,8 @@ import 'package:vizmo_demo/core/extensions.dart';
 import 'package:vizmo_demo/data/models/employee.dart';
 import 'package:vizmo_demo/presentation/widgets/two_row_text.dart';
 
+/// Used to show the employee details
+/// takes in the [Employee] as a parameter
 class EmployeeDetailsCard extends StatelessWidget {
   final Employee emp;
 

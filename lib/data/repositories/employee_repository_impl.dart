@@ -15,15 +15,13 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
   EmployeeRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<Either<AppError, Checkin>> getCheckin(Map<String, dynamic> params) {
-    // TODO: implement getCheckin
-    throw UnimplementedError();
+  Future<Either<AppError, Checkin>> getCheckin(GetCheckinParams params) {
+    return ApiCallWithError.call(() => _remoteDataSource.getCheckin(params));
   }
 
   @override
   Future<Either<AppError, List<Checkin>>> getCheckins(GetCheckinParams params) {
-    return ApiCallWithError.call(
-        () => _remoteDataSource.getCheckins(params));
+    return ApiCallWithError.call(() => _remoteDataSource.getCheckins(params));
   }
 
   @override

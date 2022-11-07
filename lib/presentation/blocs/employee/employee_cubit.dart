@@ -21,19 +21,22 @@ class EmployeeCubit extends Cubit<EmployeeState> {
   OrderBy _orderBy = OrderBy.asc;
   EmployeeSortBy _sortBy = EmployeeSortBy.id;
 
-  void getEmployees({
+  Future<void> getEmployees({
     bool? isFirstFetch,
     OrderBy? orderBy,
     EmployeeSortBy? sortBy,
   }) async {
+    // prevent multiple calls to the api at once when user scrolls
     if (state is EmployeeLoading) {
       return;
     }
     List<Employee> oldEmployees = List.from(state.employees);
+    // if this is the first fetch, reset the page number and clear the list
     if (isFirstFetch == true) {
       _page = 1;
       oldEmployees.clear();
     }
+    // store orderBy and sortBy so that one next page call, we can use the same and maintain state.
     _orderBy = orderBy ?? _orderBy;
     _sortBy = sortBy ?? _sortBy;
     emit(EmployeeLoading(oldEmployees: oldEmployees));
@@ -43,17 +46,22 @@ class EmployeeCubit extends Cubit<EmployeeState> {
       (l) => emit(
           EmployeeLoadError(l.errorType, l.error, employees: oldEmployees)),
       (r) {
+        // if the api returns an empty list, we have reached the end of the list.
+        // could also improve this by checking if the length of the list is less than the limit
         if (r.isEmpty) {
           return emit(EmployeeLoaded(oldEmployees, isLastPage: true));
         }
         _page++;
-        print('page: $_page');
+        // print('page: $_page');
         oldEmployees.addAll(r);
         emit(EmployeeLoaded(oldEmployees));
       },
     );
+    return;
   }
 
+  // used to search the employees by name in search screen
+  // can add other parameters too.
   void searchEmployee({required String name}) async {
     emit(const EmployeeLoading());
     final res = await _getEmployees(GetEmployeeParams(

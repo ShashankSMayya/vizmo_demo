@@ -5,6 +5,8 @@ import 'package:vizmo_demo/data/models/employee.dart';
 import '../../core/routes/route_arguments.dart';
 import '../../core/routes/routes.dart';
 
+/// Used to show the employee details in the listview.
+/// takes in the [Employee] as a parameter
 class EmployeeCard extends StatelessWidget {
   final Employee emp;
 

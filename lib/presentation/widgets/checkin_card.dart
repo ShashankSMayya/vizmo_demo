@@ -4,6 +4,8 @@ import 'package:vizmo_demo/core/extensions.dart';
 import 'package:vizmo_demo/data/models/checkin.dart';
 import 'package:vizmo_demo/presentation/widgets/two_row_text.dart';
 
+///Used to show the checkin details in [EmployeeDetailsScreen]
+///takes in the [Checkin] as a parameter
 class CheckinCard extends StatelessWidget {
   final Checkin checkin;
 
