@@ -13,6 +13,9 @@ class EmployeeInitial extends EmployeeState {
 }
 
 class EmployeeLoading extends EmployeeState {
+  const EmployeeLoading({List<Employee> oldEmployees = const []})
+      : super(employees: oldEmployees, isLastPage: false);
+
   @override
   List<Object> get props => [];
 }
@@ -29,7 +32,9 @@ class EmployeeLoadError extends EmployeeState {
   final AppErrorType errorType;
   final String? error;
 
-  const EmployeeLoadError(this.errorType, this.error);
+  const EmployeeLoadError(this.errorType, this.error,
+      {List<Employee> employees = const []})
+      : super(employees: employees, isLastPage: false);
 
   @override
   List<Object?> get props => [errorType, error];

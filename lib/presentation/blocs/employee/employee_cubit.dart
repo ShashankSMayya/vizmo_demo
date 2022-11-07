@@ -32,16 +32,18 @@ class EmployeeCubit extends Cubit<EmployeeState> {
       _page = 1;
       oldEmployees.clear();
     }
-    emit(EmployeeLoading());
+    emit(EmployeeLoading(oldEmployees: oldEmployees));
     final res = await _getEmployees(GetEmployeeParams(
         page: _page, limit: _limit, orderBy: orderBy, sortBy: sortBy));
     res.fold(
-      (l) => emit(EmployeeLoadError(l.errorType, l.error)),
+      (l) => emit(
+          EmployeeLoadError(l.errorType, l.error, employees: oldEmployees)),
       (r) {
         if (r.isEmpty) {
           return emit(EmployeeLoaded(oldEmployees, isLastPage: true));
         }
         _page++;
+        print('page: $_page');
         oldEmployees.addAll(r);
         emit(EmployeeLoaded(oldEmployees));
       },
